@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Management Portal</title>
+
+  <!-- Bootstrap CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f8f9fa, #e9ecef);
+      padding-top: 70px;
+    }
+
+    .navbar-brand {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link:hover {
+      color: #ffd700 !important;
+    }
+
+    .card {
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card-title {
+      font-weight: 600;
+    }
+
+    .card-footer {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Class Management Portal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" 
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Classes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Class Cards -->
+  <div class="container mt-5">
+    <div class="row g-4">
+      <!-- Loop through class cards from 5 to 10 -->
+      <!-- Example: Class 5 -->
+      <div class="col-md-4" >
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 5</h5>
+            <p class="card-text">Students: 42</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 21 June 2025</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Class 6 to Class 10 (same teacher) -->
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 6</h5>
+            <p class="card-text">Students: 38</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 20 June 2025</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 7</h5>
+            <p class="card-text">Students: 40</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 19 June 2025</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 8</h5>
+            <p class="card-text">Students: 35</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 18 June 2025</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 9</h5>
+            <p class="card-text">Students: 39</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 17 June 2025</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">Class 10</h5>
+            <p class="card-text">Students: 44</p>
+            <p class="card-text">Teacher: Mrs. Sharma</p>
+             <p class="card-text">Subject: Maths</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last Updated: 16 June 2025</small>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" id="addCardBtn" class="btn btn-primary rounded-circle position-fixed"
+   style="bottom: 30px; right: 30px; width: 60px; height: 60px;
+          display: flex; align-items: center; justify-content: center;
+          font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1030;">
+  +
+</a>
+  <!-- Bootstrap JS -->
+<script>
+  const addCardBtn = document.getElementById('addCardBtn');
+  const container = document.querySelector('.row.g-4');
+
+  // Utility function to format today's date
+  function getToday() {
+    return new Date().toLocaleDateString('en-IN', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  }
+
+  // Function to create an editable card
+  function createEditableCard(className = '', numStudents = '', teacher = 'Mrs. Sharma', subject = 'Maths') {
+    const col = document.createElement('div');
+    col.className = 'col-md-4';
+
+    col.innerHTML = `
+      <div class="card shadow-sm border-0 position-relative">
+        <button class="btn-close position-absolute" style="top: 10px; right: 10px;" aria-label="Close"></button>
+        <div class="card-body">
+          <input type="text" class="form-control mb-2" placeholder="Class Name" value="${className}">
+          <input type="number" class="form-control mb-2" placeholder="No. of Students" value="${numStudents}">
+          <input type="text" class="form-control mb-2" placeholder="Class Teacher" value="${teacher}">
+          <input type="text" class="form-control mb-2" placeholder="Subject" value="${subject}">
+          <button class="btn btn-success btn-sm w-100">Save</button>
+        </div>
+      </div>
+    `;
+
+    const saveBtn = col.querySelector('.btn-success');
+    const closeBtn = col.querySelector('.btn-close');
+
+    saveBtn.addEventListener('click', () => {
+      const inputs = col.querySelectorAll('input');
+      const name = inputs[0].value || 'Unnamed Class';
+      const students = inputs[1].value || '0';
+      const teacherName = inputs[2].value || 'Mrs. Sharma';
+      const subj = inputs[3].value || 'Maths';
+      const today = getToday();
+
+      col.innerHTML = `
+        <div class="card shadow-sm border-0 position-relative">
+          <div class="card-body">
+            <h5 class="card-title">${name}</h5>
+            <p class="card-text">Subject: ${subj}</p>
+            <p class="card-text">Students: ${students}</p>
+            <p class="card-text">Teacher: ${teacherName}</p>
+            <div class="d-flex justify-content-end gap-2 mt-3">
+              <button class="btn btn-outline-primary btn-sm edit-btn">Edit</button>
+              <button class="btn btn-outline-danger btn-sm delete-btn">Delete</button>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent">
+            <small class="text-muted">Last Updated: ${today}</small>
+          </div>
+        </div>
+      `;
+
+      // Add Edit & Delete Listeners
+      const editBtn = col.querySelector('.edit-btn');
+      const deleteBtn = col.querySelector('.delete-btn');
+
+      editBtn.addEventListener('click', () => {
+        const cardInfo = {
+          className: name,
+          numStudents: students,
+          teacher: teacherName,
+          subject: subj
+        };
+        const editable = createEditableCard(
+          cardInfo.className,
+          cardInfo.numStudents,
+          cardInfo.teacher,
+          cardInfo.subject
+        );
+        container.replaceChild(editable, col);
+      });
+
+      deleteBtn.addEventListener('click', () => col.remove());
+    });
+
+    closeBtn.addEventListener('click', () => col.remove());
+
+    return col;
+  }
+
+  addCardBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const editableCard = createEditableCard();
+    container.prepend(editableCard);
+  });
+</script>
+
+
+
+
+</body>
+</html>

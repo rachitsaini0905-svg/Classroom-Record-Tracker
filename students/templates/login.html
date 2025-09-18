@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Teacher Portal</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      /* background: linear-gradient(to top left, #0078f9 30%, #72bafd 60%, #c9e1fb 90%, #ffffff 100%); */
+      /* background: linear-gradient(to top left, #0078f9 30rgb(253, 227, 114)afd 60%, #c9e1fb 90%, #ffffff 100%); */
+      background: linear-gradient(
+  to top left,
+  #fba403 15%,   /* deep sunrise orange */
+  #fcd635 40%,   /* bright sun yellow */
+  #fff1a8 70%,   /* soft golden mist */
+  #ffffff 100%   /* fading into white sky */
+);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-box {
+      background-color: white;
+      padding: 40px 30px;
+      width: 360px;
+      border-radius: 15px;
+      box-shadow: -30px -30px 100px rgba(237, 237, 235, 0.5),
+                  10px 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #927f04;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #c4b003;
+    }
+
+    button {
+      width: 100%;
+      background-color: #fcd425;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #867b2f;
+    }
+
+    p.signup-link {
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    p.signup-link a {
+      color: #a1a05c;
+      text-decoration: none;
+    }
+
+    p.signup-link a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Welcome Back</h2>
+    <form method="POST" action="/login/">
+      {% csrf_token %}
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Log In</button>
+    </form>
+    <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+  </div>
+
+</body>
+</html>

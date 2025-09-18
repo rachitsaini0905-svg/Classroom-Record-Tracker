@@ -1,0 +1,213 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Records by Class</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 30px;
+      color: #0d6efd;
+      text-align: center;
+    }
+    h3 {
+      margin-top: 40px;
+      color: #0d6efd;
+    }
+    .table {
+      margin-top: 15px;
+    }
+    .form-section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Student Records Grouped by Class</h1>
+
+    <!-- Add Student Form -->
+    <div class="form-section">
+      <h4>Add New Student</h4>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-3">
+            <input type="text" name="name" class="form-control" placeholder="Full Name" required />
+          </div>
+          <div class="col-md-2">
+            <input type="number" name="roll_number" class="form-control" placeholder="Roll No." required />
+          </div>
+          <div class="col-md-2">
+            <input type="text" name="class_name" class="form-control" placeholder="Class" required />
+          </div>
+          <div class="col-md-1">
+            <input type="number" name="maths_marks" class="form-control" placeholder="Maths" required />
+          </div>
+          <div class="col-md-1">
+            <input type="number" name="science_marks" class="form-control" placeholder="Science" required />
+          </div>
+          <div class="col-md-1">
+            <input type="number" name="english_marks" class="form-control" placeholder="English" required />
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Add Student</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Grouped Tables by Class -->
+    {% for class_name, students in grouped_students.items %}
+      <h3>{{ class_name }}</h3>
+      <table class="table table-bordered table-striped table-hover">
+ <!-- Only the table body is shown for brevity -->
+<thead class="table-dark">
+  <tr>
+    <th>Roll No.</th>
+    <th>Name</th>
+    {% for subject in subjects %}
+      <th>{{ subject }}</th>
+    {% endfor %}
+    <th>Total</th>
+    <th>Percentage</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  {% for student in students %}
+    <tr id="row-{{ student.id }}">
+      <form action="{% url 'edit_student' student.id %}" method="POST">
+        {% csrf_token %}
+        <td><input type="text" name="roll_number" value="{{ student.roll_number }}" class="form-control" readonly></td>
+        <td><input type="text" name="name" value="{{ student.name }}" class="form-control" readonly></td>
+
+        {% for subject in subjects %}
+          
+            <td>
+              <input type="number" name="subject_{{ subject }}" value="{{ mark.marks }}" class="form-control" readonly />
+            </td>
+          
+        {% endfor %}
+
+        <td>{{ student.get_total }}</td>
+        <td>{{ student.get_percentage }}%</td>
+        <td>
+          {% if student.get_status == "Passed" %}
+            <span class="badge bg-success">Passed</span>
+          {% else %}
+            <span class="badge bg-danger">Failed</span>
+          {% endif %}
+        </td>
+
+        <td class="d-flex gap-1">
+          <button type="button" class="btn btn-sm btn-primary" onclick="enableEdit({{ student.id }})">Edit</button>
+          <button type="submit" class="btn btn-sm btn-success d-none" id="save-btn-{{ student.id }}">Save</button>
+      </form>
+      <form action="{% url 'delete_student' student.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+      </form>
+    </td>
+    </tr>
+  {% endfor %}
+</tbody>
+
+
+
+
+    {% empty %}
+      <p>No students found.</p>
+    {% endfor %}
+  </div>
+<script>
+// function editRow(studentId) {
+//   const row = document.getElementById(`row-${studentId}`);
+//   const inputs = row.querySelectorAll("input");
+//   const spans = row.querySelectorAll("span");
+
+//   inputs.forEach(input => input.classList.remove("d-none"));
+//   spans.forEach(span => span.classList.add("d-none"));
+
+//   row.querySelector(".edit-btn").classList.add("d-none");
+//   row.querySelector(".save-btn").classList.remove("d-none");
+//   row.querySelector(".cancel-btn").classList.remove("d-none");
+// }
+
+function cancelEdit(studentId) {
+  const row = document.getElementById(`row-${studentId}`);
+  const inputs = row.querySelectorAll("input");
+  const spans = row.querySelectorAll("span");
+
+  inputs.forEach(input => input.classList.add("d-none"));
+  spans.forEach(span => span.classList.remove("d-none"));
+
+  row.querySelector(".edit-btn").classList.remove("d-none");
+  row.querySelector(".save-btn").classList.add("d-none");
+  row.querySelector(".cancel-btn").classList.add("d-none");
+}
+</script>
+<script>
+
+
+  function enableEdit(id) {
+    const row = document.getElementById(`row-${id}`);
+    const inputs = row.querySelectorAll('input');
+
+    inputs.forEach(input => {
+      input.removeAttribute('readonly');
+    });
+
+    // Show Save button
+    document.getElementById(`save-btn-${id}`).classList.remove('d-none');
+  }
+
+
+
+function saveEdit(studentId) {
+    // Gather edited values
+    const roll = document.getElementById(`edit-roll-${studentId}`).value;
+    const name = document.getElementById(`edit-name-${studentId}`).value;
+    const className = document.getElementById(`edit-class-${studentId}`).value;
+    const maths = document.getElementById(`edit-maths-${studentId}`).value;
+    const science = document.getElementById(`edit-science-${studentId}`).value;
+    const english = document.getElementById(`edit-english-${studentId}`).value;
+
+    // Create a form to submit the updated data
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `/students/edit/${studentId}/`;
+    
+    // Add CSRF token
+    const csrfToken = '{{ csrf_token }}';
+    form.innerHTML = `
+      <input type="hidden" name="csrfmiddlewaretoken" value="${csrfToken}">
+      <input type="hidden" name="roll_number" value="${roll}">
+      <input type="hidden" name="name" value="${name}">
+      <input type="hidden" name="class_name" value="${className}">
+      <input type="hidden" name="maths_marks" value="${maths}">
+      <input type="hidden" name="science_marks" value="${science}">
+      <input type="hidden" name="english_marks" value="${english}">
+    `;
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
+
+
+
+</body>
+</html>
